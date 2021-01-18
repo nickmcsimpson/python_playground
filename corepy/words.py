@@ -1,12 +1,50 @@
+import sys
 from urllib.request import urlopen
 
-story = urlopen('http://sixty-north.com/c/t.txt')
-story_words = []
-for line in story:
-    line_words = line.decode('utf-8').split()
-    for word in line_words:
-        story_words.append(word)
-story.close()
 
-for word in story_words:
-    print(word)
+def fetch_words(url):
+    # Shows in help(fetch_words)
+    """Fetch a list of words from a URL.
+
+        Args:
+            url: The URL of the UTF-8 text document.
+
+        Returns:
+            A list of strings containing the words from
+            the document.
+    """
+    story = urlopen(url)
+    story_words = []
+    for line in story:
+        line_words = line.decode('utf-8').split()
+        for word in line_words:
+            story_words.append(word)
+    story.close()
+    return story_words
+
+
+def print_itmes(items):
+    """Print items one per line
+
+        Args:
+            items: An iterable series of printable items.
+    """
+    for item in items:
+        print(item)
+
+
+def main(url):
+    """Print each word from a text document at the URL
+
+        Args:
+            url: The URL of the UTF-8 text document.
+    """
+    # url = sys.argv[1] # Not very useful for running as script
+    words = fetch_words(url)
+    print(words)
+
+
+# "Dunder" functions allow you to import and run as script
+# print(__name__)
+if __name__ == '__main__':
+    main(sys.argv[1])
