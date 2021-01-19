@@ -1,3 +1,11 @@
+""" All types in Python are Objects
+
+    Strongly types and not coerced
+
+    Object names function like pointers
+
+"""
+
 import time
 
 m = [9, 15, 24]
