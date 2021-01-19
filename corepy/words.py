@@ -1,3 +1,10 @@
+"""Retrieve and print words from a URL.
+
+Usage:
+    python3 words.py <URL>
+"""
+#!/usr/bin/env python3
+
 import sys
 from urllib.request import urlopen
 
@@ -47,4 +54,4 @@ def main(url):
 # "Dunder" functions allow you to import and run as script
 # print(__name__)
 if __name__ == '__main__':
-    main(sys.argv[1])
+    main(sys.argv[1]) # The 0th arg is the module filename.
