@@ -43,3 +43,31 @@ def set_count1(c):
 def set_count(c):
     global count
     count = c # Now this will work
+
+"""Built in collections
+
+
+"""
+
+#Tuples
+
+#Strings
+
+s = "New" + "found" + "land"
+
+s += " city"# += creates temporaries
+
+s.join('Do you know the way?')
+
+"unforgetable".partition('forget')
+# ('un', 'forget', 'able') Tuple
+
+# Tuble unpacking
+origin, _, destination = "Seattle-Boston".partition('-') # unpacked into unused variable
+
+"{0} north of {1}".format(59.6, 888)# inject variable into strings
+
+"Galactic position x={pos[0]}, y={pos[1]}, z={pos[3]}".format(pos=(65.2, 23.1, 82.2))
+
+# F strings embed expressions with minimal syntax
+f'one plus one is {1+1}'
