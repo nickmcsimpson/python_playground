@@ -1,4 +1,4 @@
-from flask import Flask, render_template, abort
+from flask import Flask, render_template, abort, jsonify
 from datetime import datetime
 
 from model import db
@@ -20,10 +20,9 @@ Map([<Rule '/load_counter' (GET, HEAD, OPTIONS) -> load_counter>,
 
 @app.route("/")
 def welcome():
-    # return "Welcome to my Flash Cards application!"
     return render_template(
         "welcome.html",
-        message="Here's a message from the view",#jinja variables
+        cards=db,
     )
 
 @app.route("/date")
@@ -53,6 +52,20 @@ def card_view(index):
         return render_template("card.html", 
                                 card=card,
                                 index=index,
+                                max_index=len(db)-1
                                 )
+    except IndexError:
+        abort(404)
+
+
+@app.route("/api/card/")
+def api_card_list():
+    return jsonify(db)
+
+
+@app.route('/api/card/<int:index>')
+def api_card_detail(index):
+    try:
+        return db[index] #automatically serialized and returned as JSON
     except IndexError:
         abort(404)

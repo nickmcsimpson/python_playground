@@ -13,6 +13,7 @@
             <a href="{{ url_for('welcome') }}">
                 Home
             </a>
+            <!-- Jinja can use logical expressions and will remove comments-->
             {% if index > 0 %}
             <button>
                 <a href="{{ url_for('card_view', index=index - 1) }}">

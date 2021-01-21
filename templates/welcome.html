@@ -16,9 +16,20 @@
             </ul>
             in the <a href="https://app.pluralsight.com/channels/details/75ed384c-8c16-4502-ae52-c243750f19de">Alight Analytics Channel</a>
         </p>
-        <img src="/static/red_blue.jpg" alt="Red and Blue cars"/>
-        <p>
-            {{message}}
-        </p>
+        <div style="width: 100%; padding: 40px">
+            <img style="width: 80%;" src="/static/red_blue.jpg" alt="Red and Blue cars"/>
+        </div>
+        
+        <h2>Flash Cards</h2>
+        <ul>
+            {% for card in cards %}
+            <li>
+                <!-- Jinja auto index -->
+                <a href="{{ url_for('card_view', index=loop.index0) }}">
+                    {{card.question}}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
     </body>
 </html>
