@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="eng">
+    <head>
+        <meta charset="UTF-8">
+        <title>Remove Card</title>
+    </head>
+    <body>
+        <h1>Remove Card</h1>
+        Question: {{ card.question }}
+        <br/>
+        Answer: {{ card.answer }}
+
+        <h2>Are you sure?</h2>
+        <form method="POST">
+            <button type="submit">Yes</button>
+            <a href="{{ url_for('welcome') }}">No</a>
+        </form>
+    </body>
+</html>
