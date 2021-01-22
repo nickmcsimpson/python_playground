@@ -1,5 +1,5 @@
 from flask import (Flask, render_template, abort, jsonify, request,
-                    redirect, url_for)
+                   redirect, url_for)
 from datetime import datetime
 
 from model import db, save_db
@@ -26,16 +26,18 @@ def welcome():
         cards=db,
     )
 
+
 @app.route("/date")
 def date():
     return "This page was served at " + str(datetime.now())
 
-#global
+
+# global
 count = 0
 
 
 @app.route("/load_counter")
-def count_demo():#name is irrelevant to route
+def count_demo():  # name is irrelevant to route
     global count
     count += 1
     return f"We loaded this page {count} times"
@@ -46,15 +48,15 @@ def card_default():
     return card_view(0)
 
 
-@app.route("/card/<int:index>")#parameter format
+@app.route("/card/<int:index>")  # parameter format
 def card_view(index):
     try:
         card = api_card_detail(index)
-        return render_template("card.html", 
-                                card=card,
-                                index=index,
-                                max_index=len(db)-1
-                                )
+        return render_template("card.html",
+                               card=card,
+                               index=index,
+                               max_index=len(db) - 1
+                               )
     except IndexError:
         abort(404)
 
@@ -69,7 +71,7 @@ def add_card():
         }
         db.append(card)
         save_db()
-        return redirect(url_for('card_view', index=len(db)-1))
+        return redirect(url_for('card_view', index=len(db) - 1))
     else:
         return render_template("add_card.html")
 
@@ -79,7 +81,7 @@ def remove_card(index):
     try:
         if request.method == "POST":
             # db.pop(index)
-            del db(index)
+            del db[index]
             save_db()
             return redirect(url_for('welcome'))
         else:
@@ -97,6 +99,6 @@ def api_card_list():
 @app.route('/api/card/<int:index>')
 def api_card_detail(index):
     try:
-        return db[index] #automatically serialized and returned as JSON
+        return db[index]  # automatically serialized and returned as JSON
     except IndexError:
         abort(404)
