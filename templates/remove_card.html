@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="eng">
-    <head>
-        <meta charset="UTF-8">
-        <title>Remove Card</title>
-    </head>
-    <body>
+{% extends "base.html" %}
+
+{% block title %}Remove Card{% endblock %}
+
+{% block content %}
         <h1>Remove Card</h1>
         Question: {{ card.question }}
         <br/>
@@ -15,5 +13,4 @@
             <button type="submit">Yes</button>
             <a href="{{ url_for('welcome') }}">No</a>
         </form>
-    </body>
-</html>
+{% endblock %}

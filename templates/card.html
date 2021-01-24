@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="eng">
-    <head>
-        <meta charset="UTF-8">
-        <title>Flash Card</title>
-    </head>
-    <body>
+{% extends "base.html" %}
+
+{% block title %}Flash Card{% endblock %}
+
+{% block content %}
         <h1>Flash Card</h1>
         Question: {{ card.question }}
         <br/>
@@ -32,5 +30,4 @@
         <a href="{{ url_for('remove_card', index=index) }}">
             Remove Card
         </a>
-    </body>
-</html>
+{% endblock %}

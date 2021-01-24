@@ -1,35 +1,32 @@
-<!DOCTYPE html>
-<html lang="eng">
-    <head>
-        <meta charset="UTF-8">
-        <title>Welcome!</title>
-    </head>
-    <body>
-        <h1>Welcome to the Python/Flask Playground</h1>
+{% extends "base.html" %}
 
-        <p>
-            This is where I experiment and learn about making things in Python.
-            Contains code from Pluralsight courses:
-            <ul>
-                <li>Core Python: Getting Started</li>
-                <li>Flask: Getting Started</li>
-            </ul>
-            in the <a href="https://app.pluralsight.com/channels/details/75ed384c-8c16-4502-ae52-c243750f19de">Alight Analytics Channel</a>
-        </p>
-        <div style="width: 100%; padding: 40px">
-            <img style="width: 80%;" src="/static/red_blue.jpg" alt="Red and Blue cars"/>
-        </div>
-        
-        <h2>Flash Cards</h2>
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+    <h1>Welcome to the Python/Flask Playground</h1>
+
+    <p>
+        This is where I experiment and learn about making things in Python.
+        Contains code from Pluralsight courses:
         <ul>
-            {% for card in cards %}
-            <li>
-                <!-- Jinja auto index -->
-                <a href="{{ url_for('card_view', index=loop.index0) }}">
-                    {{card.question}}
-                </a>
-            </li>
-            {% endfor %}
+            <li>Core Python: Getting Started</li>
+            <li>Flask: Getting Started</li>
         </ul>
-    </body>
-</html>
+        in the <a href="https://app.pluralsight.com/channels/details/75ed384c-8c16-4502-ae52-c243750f19de">Alight Analytics Channel</a>
+    </p>
+    <div style="width: 100%; padding: 40px">
+        <img style="width: 80%;" src="/static/red_blue.jpg" alt="Red and Blue cars"/>
+    </div>
+
+    <h2>Flash Cards</h2>
+    <ul>
+        {% for card in cards %}
+        <li>
+            <!-- Jinja auto index -->
+            <a href="{{ url_for('card_view', index=loop.index0) }}">
+                {{card.question}}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
