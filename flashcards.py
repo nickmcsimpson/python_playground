@@ -1,3 +1,5 @@
+import os
+
 from flask import (Flask, render_template, abort, jsonify, request,
                    redirect, url_for)
 from datetime import datetime
@@ -5,8 +7,30 @@ from datetime import datetime
 from model import db, save_db
 
 app = Flask(__name__)
+# Optionally configure with settings like 'static' location:
+# app = Flask(__name__, static_folder='/path/to/static/folder')
+
 # export FLASK_APP=flashcards.py
 # export FLASK_ENV=development
+# FROM Packt Flask Book
+# Setup variables to load from a file, with defaults
+DEBUG = True
+TESTING = True
+# From this file:
+# app.config.from_object(__name__)
+# From an object in a class:
+app.config.from_object('configuration.DevelopmentConfig')
+# From a #.cfg file:
+# app.config.from_pyfile('/path/to/config/file')
+# From Env variables:
+# app.config.from_envvar('PATH_TO_CONFIG_FILE')
+
+
+# SQLAlchemy:
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ('DATABASE_URI')
+# postgresql://yourusername:yourpassword@localhost/yournewdb.
+# Model data in PostgreSQL:
+#     psycopg2
 
 """
 >>> import flashcards
