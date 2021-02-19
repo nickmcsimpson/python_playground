@@ -148,4 +148,13 @@ for key, value in movies.items():
 # c => Mr Nobody
 
 
+#  SET
+x = {1, 2, 3, 4}
+
+x.add(5)
+
+
+
+
+
 
