@@ -68,7 +68,7 @@ origin, _, destination = "Seattle-Boston".partition('-') # unpacked into unused 
 "{0} north of {1}".format(59.6, 888)
 # inject variable into strings
 
-"Galactic position x={pos[0]}, y={pos[1]}, z={pos[3]}".format(pos=(65.2, 23.1, 82.2))
+"Galactic position x={pos[0]}, y={pos[1]}, z={pos[2]}".format(pos=(65.2, 23.1, 82.2))
 
 # F strings embed expressions with minimal syntax
 print(f'one plus one is {1+1}')
@@ -109,7 +109,7 @@ b = a[:]
 w = "the quick bronw fox jumps over the lazy dog".split()
 print(w)
 # ['the', 'quick', 'bronw', 'fox', 'jumps', 'over', 'the', 'lazy', 'dog']
-i = w.index['fox']
+i = w.index('fox')
 # Traceback (most recent call last):
 #   File "<stdin>", line 1, in <module>
 # TypeError: 'builtin_function_or_method' object is not subscriptable
@@ -118,7 +118,7 @@ print(i)
 # 3
 print(w[i])
 # 'fox'
-print(w.index('unicorn'))
+# print(w.index('unicorn'))
 # Traceback (most recent call last):
   # File "<stdin>", line 1, in <module>
 # ValueError: 'unicorn' is not in list
