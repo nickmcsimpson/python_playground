@@ -1,5 +1,5 @@
 
-CREATE TABLE DimCurrency
+CREATE TABLE <schema>.DimCurrency
     (
       CurrencyKey INT NOT NULL ,
       CurrencyAlternateKey NCHAR(3) NOT NULL ,
@@ -7,7 +7,7 @@ CREATE TABLE DimCurrency
       CONSTRAINT PK_DimCurrency_CurrencyKey PRIMARY KEY ( CurrencyKey )
     );
 
-CREATE TABLE DimCustomer
+CREATE TABLE <schema>.DimCustomer
     (
       CustomerKey INT NOT NULL sortkey distkey,
       GeographyKey INT NULL ,
@@ -32,7 +32,7 @@ CREATE TABLE DimCustomer
       CONSTRAINT PK_DimCustomer_CustomerKey PRIMARY KEY ( CustomerKey )
     );
 
-CREATE TABLE DimDate
+CREATE TABLE <schema>.DimDate
     (
       DateKey INT NOT NULL ,
       FullDateAlternateKey DATE NOT NULL sortkey,
@@ -52,7 +52,7 @@ CREATE TABLE DimDate
       CONSTRAINT PK_DimDate_DateKey PRIMARY KEY ( DateKey )
     ) DISTSTYLE ALL;
 
-CREATE TABLE DimGeography
+CREATE TABLE <schema>.DimGeography
     (
       GeographyKey INT NOT NULL sortkey distkey,
       City NVARCHAR(30) NULL ,
@@ -66,7 +66,7 @@ CREATE TABLE DimGeography
       CONSTRAINT PK_DimGeography_GeographyKey PRIMARY KEY ( GeographyKey )
     );
 
-CREATE TABLE DimProduct
+CREATE TABLE <schema>.DimProduct
     (
       ProductKey INT NOT NULL sortkey distkey,
       ProductAlternateKey NVARCHAR(25) NULL ,
@@ -96,7 +96,7 @@ CREATE TABLE DimProduct
       CONSTRAINT PK_DimProduct_ProductKey PRIMARY KEY ( ProductKey )
     );
 
-CREATE TABLE DimProductCategory
+CREATE TABLE <schema>.DimProductCategory
     (
       ProductCategoryKey INT NOT NULL distkey sortkey,
       ProductCategoryAlternateKey INT NULL ,
@@ -105,7 +105,7 @@ CREATE TABLE DimProductCategory
         ( ProductCategoryKey )
     );
 
-CREATE TABLE DimProductSubcategory
+CREATE TABLE <schema>.DimProductSubcategory
     (
       ProductSubcategoryKey INT NOT NULL ,
       ProductSubcategoyAlternateKey INT NULL ,
@@ -116,7 +116,7 @@ CREATE TABLE DimProductSubcategory
     );
 
 
-CREATE TABLE DimReseller
+CREATE TABLE <schema>.DimReseller
     (
       ResellerKey INT NOT NULL ,
       GeographyKey INT NULL distkey sortkey,
@@ -142,7 +142,7 @@ CREATE TABLE DimReseller
     );
 
 
-CREATE TABLE FactProductInventory
+CREATE TABLE <schema>.FactProductInventory
     (
       ProductKey INT NOT NULL ,
       DateKey INT NOT NULL distkey sortkey,
@@ -154,7 +154,7 @@ CREATE TABLE FactProductInventory
       CONSTRAINT PK_FactProductInventory PRIMARY KEY ( ProductKey, DateKey )
     );
 
-CREATE TABLE FactRate
+CREATE TABLE <schema>.FactRate
     (
       CurrencyKey INT NOT NULL ,
       DateKey INT NOT NULL distkey sortkey,
@@ -165,7 +165,7 @@ CREATE TABLE FactRate
         ( CurrencyKey, DateKey )
     );
 
-CREATE TABLE FactSales
+CREATE TABLE <schema>.FactSales
     (
       ProductKey INT NOT NULL ,
       OrderDateKey INT NOT NULL distkey sortkey,
@@ -198,58 +198,58 @@ CREATE TABLE FactSales
 
 
 
-ALTER TABLE   DimCustomer     ADD  CONSTRAINT  FK_DimCustomer_DimGeography  FOREIGN KEY( GeographyKey )
-REFERENCES   DimGeography  ( GeographyKey );
+ALTER TABLE <schema>.DimCustomer     ADD  CONSTRAINT  FK_DimCustomer_DimGeography  FOREIGN KEY( GeographyKey )
+REFERENCES <schema>.<schema>.DimGeography  ( GeographyKey );
 
 
-ALTER TABLE   DimProduct     ADD  CONSTRAINT  FK_DimProduct_DimProductSubcategory  FOREIGN KEY( ProductSubcategoryKey )
-REFERENCES   DimProductSubcategory  ( ProductSubcategoryKey );
+ALTER TABLE <schema>.DimProduct     ADD  CONSTRAINT  FK_DimProduct_DimProductSubcategory  FOREIGN KEY( ProductSubcategoryKey )
+REFERENCES <schema>.DimProductSubcategory  ( ProductSubcategoryKey );
 
 
-ALTER TABLE   DimProductSubcategory     ADD  CONSTRAINT  FK_DimProductSubcategory_DimProductCategory  FOREIGN KEY( ProductCategoryKey )
-REFERENCES   DimProductCategory  ( ProductCategoryKey );
+ALTER TABLE <schema>.DimProductSubcategory     ADD  CONSTRAINT  FK_DimProductSubcategory_DimProductCategory  FOREIGN KEY( ProductCategoryKey )
+REFERENCES <schema>.DimProductCategory  ( ProductCategoryKey );
 
 
-ALTER TABLE   DimReseller     ADD  CONSTRAINT  FK_DimReseller_DimGeography  FOREIGN KEY( GeographyKey )
-REFERENCES   DimGeography  ( GeographyKey );
+ALTER TABLE <schema>.DimReseller     ADD  CONSTRAINT  FK_DimReseller_DimGeography  FOREIGN KEY( GeographyKey )
+REFERENCES <schema>.DimGeography  ( GeographyKey );
 
 
-ALTER TABLE   FactProductInventory     ADD  CONSTRAINT  FK_FactProductInventory_DimDate  FOREIGN KEY( DateKey )
-REFERENCES   DimDate  ( DateKey );
+ALTER TABLE <schema>.FactProductInventory     ADD  CONSTRAINT  FK_FactProductInventory_DimDate  FOREIGN KEY( DateKey )
+REFERENCES <schema>.DimDate  ( DateKey );
 
 
-ALTER TABLE   FactProductInventory     ADD  CONSTRAINT  FK_FactProductInventory_DimProduct  FOREIGN KEY( ProductKey )
-REFERENCES   DimProduct  ( ProductKey );
+ALTER TABLE <schema>.FactProductInventory     ADD  CONSTRAINT  FK_FactProductInventory_DimProduct  FOREIGN KEY( ProductKey )
+REFERENCES <schema>.DimProduct  ( ProductKey );
 
 
-ALTER TABLE   FactRate     ADD  CONSTRAINT  FK_FactCurrencyRate_DimCurrency  FOREIGN KEY( CurrencyKey )
-REFERENCES   DimCurrency  ( CurrencyKey );
+ALTER TABLE <schema>.FactRate     ADD  CONSTRAINT  FK_FactCurrencyRate_DimCurrency  FOREIGN KEY( CurrencyKey )
+REFERENCES <schema>.DimCurrency  ( CurrencyKey );
 
 
-ALTER TABLE   FactRate     ADD  CONSTRAINT  FK_FactCurrencyRate_DimDate  FOREIGN KEY( DateKey )
-REFERENCES   DimDate  ( DateKey );
+ALTER TABLE <schema>.FactRate     ADD  CONSTRAINT  FK_FactCurrencyRate_DimDate  FOREIGN KEY( DateKey )
+REFERENCES <schema>.DimDate  ( DateKey );
 
 
-ALTER TABLE   FactSales     ADD  CONSTRAINT  FK_FactSales_DimCurrency  FOREIGN KEY( CurrencyKey )
-REFERENCES   DimCurrency  ( CurrencyKey );
+ALTER TABLE <schema>.FactSales     ADD  CONSTRAINT  FK_FactSales_DimCurrency  FOREIGN KEY( CurrencyKey )
+REFERENCES <schema>.DimCurrency  ( CurrencyKey );
 
 
-ALTER TABLE   FactSales     ADD  CONSTRAINT  FK_FactSales_DimCustomer  FOREIGN KEY( CustomerKey )
-REFERENCES   DimCustomer  ( CustomerKey );
+ALTER TABLE <schema>.FactSales     ADD  CONSTRAINT  FK_FactSales_DimCustomer  FOREIGN KEY( CustomerKey )
+REFERENCES <schema>.DimCustomer  ( CustomerKey );
 
 
-ALTER TABLE   FactSales     ADD  CONSTRAINT  FK_FactSales_DimDate  FOREIGN KEY( OrderDateKey )
-REFERENCES   DimDate  ( DateKey );
+ALTER TABLE <schema>.FactSales     ADD  CONSTRAINT  FK_FactSales_DimDate  FOREIGN KEY( OrderDateKey )
+REFERENCES <schema>.DimDate  ( DateKey );
 
 
-ALTER TABLE   FactSales     ADD  CONSTRAINT  FK_FactSales_DimDate1  FOREIGN KEY( DueDateKey )
-REFERENCES   DimDate  ( DateKey );
+ALTER TABLE <schema>.FactSales     ADD  CONSTRAINT  FK_FactSales_DimDate1  FOREIGN KEY( DueDateKey )
+REFERENCES <schema>.DimDate  ( DateKey );
 
 
-ALTER TABLE   FactSales     ADD  CONSTRAINT  FK_FactSales_DimDate2  FOREIGN KEY( ShipDateKey )
-REFERENCES   DimDate  ( DateKey );
+ALTER TABLE <schema>.FactSales     ADD  CONSTRAINT  FK_FactSales_DimDate2  FOREIGN KEY( ShipDateKey )
+REFERENCES <schema>.DimDate  ( DateKey );
 
 
-ALTER TABLE   FactSales     ADD  CONSTRAINT  FK_FactSales_DimProduct  FOREIGN KEY( ProductKey )
-REFERENCES   DimProduct  ( ProductKey );
+ALTER TABLE <schema>.FactSales     ADD  CONSTRAINT  FK_FactSales_DimProduct  FOREIGN KEY( ProductKey )
+REFERENCES <schema>.DimProduct  ( ProductKey );
 

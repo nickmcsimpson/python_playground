@@ -74,17 +74,22 @@ def run_queries_with_file_context_manager(file_name, cursor=None,
 
 @query_wrapper
 @time_sequence
-def run_individual_queries_in_separate_function(file_name, cursor=None, schema='', **kwargs):
+def run_individual_queries_in_separate_function(file_name, cursor=None, schema='', get_file_from=None, **kwargs):
     """Open file as context manager and execute individually via function call"""
-    with open(file_name) as file:
-        sql_script = file.read()
-        for command in sql_script.split(';'):
-            if command.isspace() or command == '':
-                continue
-            try:
-                run_singular_query(command.replace('<schema>', schema), cursor)
-            except ValueError:
-                print(f"Can't Format query:\n{command}")
+    if get_file_from is not None:
+        sql_script = get_file_from(file_name)
+    else:
+        with open(file_name) as file:
+            sql_script = file.read()
+
+    for command in sql_script.split(';'):
+        if command.isspace() or command == '':
+            continue
+        try:
+            run_singular_query(command.replace('<schema>', schema), cursor)
+        except ValueError:
+            print(f"Can't Format query:\n{command}")
+
 
 @time_sequence
 def run_singular_query(command, cursor=None):
