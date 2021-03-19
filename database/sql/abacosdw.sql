@@ -199,7 +199,7 @@ CREATE TABLE <schema>.FactSales
 
 
 ALTER TABLE <schema>.DimCustomer     ADD  CONSTRAINT  FK_DimCustomer_DimGeography  FOREIGN KEY( GeographyKey )
-REFERENCES <schema>.<schema>.DimGeography  ( GeographyKey );
+REFERENCES <schema>.DimGeography  ( GeographyKey );
 
 
 ALTER TABLE <schema>.DimProduct     ADD  CONSTRAINT  FK_DimProduct_DimProductSubcategory  FOREIGN KEY( ProductSubcategoryKey )
