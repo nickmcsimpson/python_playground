@@ -112,6 +112,7 @@ def run_individual_queries_in_separate_transactions(file_name, schema='', **kwar
                 run_singular_query_as_transaction(command.replace('<schema>', schema), **kwargs)
             except ValueError:
                 print(f"Can't Format query:\n{command}")
+                print('___________________________\n\n\n')
 
 
 @query_wrapper
